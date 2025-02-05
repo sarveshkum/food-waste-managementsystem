@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Board</title>
+    <link rel="stylesheet" href="job.css">
+    <style>
+        /* Basic styling for the form */
+        #registration-form {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+        #registration-form h3 {
+            margin-top: 0;
+        }
+        #registration-form button {
+            margin-top: 10px;
+        }
+        #overlay {
+            display: none; /* Initially hidden */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="jobportal.jpeg" alt="Job Portal" style="width: 100%; height: auto; position: absolute; top: 0; left: 0; z-index: 0;">
+        <h1>Job Board</h1>
+        <nav>
+            <ul>
+                <li><a href="#jobs">Job Listings</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <h2 id="jobs">Job Listings</h2>
+        <div class="filter">
+            <label for="domain">Filter by Domain:</label>
+            <select id="domain" onchange="filterJobs()">
+                <option value="all">All Domains</option>
+                <option value="engineering">Engineering</option>
+                <option value="marketing">Marketing</option>
+                <option value="design">Design</option>
+                <option value="data">Data</option>
+                <option value="management">Management</option>
+                <option value="writing">Writing</option>
+            </select>
+        </div>
+        
+        <!-- Job Listings -->
+        <div class="job-listing engineering">
+            <h3>Software Engineer</h3>
+            <p>Company: Tech Innovators</p>
+            <p>Location: Remote</p>
+            <p>Description: Develop and maintain software solutions.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing engineering">
+            <h3>Backend Developer</h3>
+            <p>Company: Code Labs</p>
+            <p>Location: New York, NY</p>
+            <p>Description: Build server-side applications and APIs.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing marketing">
+            <h3>Digital Marketing Specialist</h3>
+            <p>Company: Market Masters</p>
+            <p>Location: Remote</p>
+            <p>Description: Develop and implement digital marketing strategies.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing marketing">
+            <h3>SEO Specialist</h3>
+            <p>Company: SEO Experts</p>
+            <p>Location: Los Angeles, CA</p>
+            <p>Description: Optimize website content for search engines.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing design">
+            <h3>UI/UX Designer</h3>
+            <p>Company: Design Pros</p>
+            <p>Location: San Francisco, CA</p>
+            <p>Description: Create intuitive and engaging user interfaces.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing data">
+            <h3>Data Scientist</h3>
+            <p>Company: Data Insights</p>
+            <p>Location: Boston, MA</p>
+            <p>Description: Analyze and interpret complex data sets.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing management">
+            <h3>Project Manager</h3>
+            <p>Company: Manage IT</p>
+            <p>Location: Remote</p>
+            <p>Description: Oversee and coordinate project activities.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <div class="job-listing writing">
+            <h3>Content Writer</h3>
+            <p>Company: Write Right</p>
+            <p>Location: Chicago, IL</p>
+            <p>Description: Create and edit engaging content for various platforms.</p>
+            <button onclick="showRegistrationForm()">Apply Now</button>
+        </div>
+        <!-- Add other job listings similarly -->
+
+        <!-- Contact Us Section -->
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@jobboard.com</p>
+            <p>Phone: +91 9876543210</p>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Job Board</p>
+    </footer>
+
+    <!-- Registration Form -->
+    <div id="overlay"></div>
+    <div id="registration-form">
+        <h3>Register to Apply</h3>
+        <form id="apply-form">
+            <label for="name">Full Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="phone">Phone:</label><br>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            <label for="resume">Resume URL:</label><br>
+            <input type="url" id="resume" name="resume" required><br><br>
+            <button type="submit">Submit Application</button>
+            <button type="button" onclick="hideRegistrationForm()">Cancel</button>
+        </form>
+    </div>
+
+    <script>
+        function filterJobs() {
+            const domain = document.getElementById('domain').value;
+            const jobListings = document.querySelectorAll('.job-listing');
+            
+            jobListings.forEach(job => {
+                if (domain === 'all' || job.classList.contains(domain)) {
+                    job.style.display = 'block';
+                } else {
+                    job.style.display = 'none';
+                }
+            });
+        }
+
+        function showRegistrationForm() {
+            document.getElementById('registration-form').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function hideRegistrationForm() {
+            document.getElementById('registration-form').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
